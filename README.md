@@ -2,17 +2,7 @@
 
 A complete, zero-build-step HTML5 Canvas stealth laser puzzle game ready for instant deployment on **Vercel**.
 
-## 🚀 Deploy to Vercel in 30 Seconds
-
-### Option A: Vercel CLI
-```bash
-npx vercel --prod
-```
-
-### Option B: GitHub + Vercel Dashboard
-1. Push this folder to a GitHub repository.
-2. Import the repository on [vercel.com/new](https://vercel.com/new).
-3. Keep **Framework Preset** as `Other` (Root Directory: `./`) and click **Deploy**.
+DEMO LINK: https://pixathon-2026-wtfour-dim072rn5-jahnavi-c65a.vercel.app/
 
 ## 📂 Customizing Sprites & Audio (`/assets`)
 
