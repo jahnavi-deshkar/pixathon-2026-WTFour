@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B0F19">
+  <meta name="description" content="A quiet heist made of light. Rotate prisms, recharge a laser, and crack the vault.">
+  <title>Prism Heist — A quiet heist made of light</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-shell" class="app-shell" inert>
+    <header class="masthead">
+      <a class="wordmark" href="index.html" aria-label="Prism Heist title screen"><span class="brand-mark" aria-hidden="true">◇</span><span>PRISM <b>HEIST</b></span></a>
+      <div class="masthead-actions">
+        <button id="levels-button" class="button compact" type="button"><span aria-hidden="true">▦</span> Vaults <kbd>L</kbd></button>
+        <button id="mute-button" class="button compact" type="button" aria-pressed="false"><canvas data-icon="mute" width="28" height="28" aria-hidden="true"></canvas><span id="mute-label">Sound on</span><kbd>M</kbd></button>
+      </div>
+    </header>
+
+    <main>
+      <div class="level-heading">
+        <div><p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> OPERATION / <span id="vault-number">01</span></p><h1 id="level-name">The Training Vault</h1></div>
+        <span class="tier-badge" id="tier-label">Easy / 01</span>
+      </div>
+
+      <div class="game-layout">
+        <section class="vault-panel" aria-label="Vault puzzle">
+          <div class="feed-heading"><span><span class="record-dot" aria-hidden="true"></span> LIVE VAULT FEED</span><span id="feed-label">PRISM ARRAY / 5 × 5</span></div>
+          <div class="board-frame" id="board-frame">
+            <canvas id="board" width="640" height="640" tabindex="0" role="application" aria-label="Vault board. Arrow keys select a prism. Enter rotates clockwise. Swipe a prism to rotate it."></canvas>
+            <canvas id="particles" width="640" height="640" aria-hidden="true"></canvas>
+          </div>
+          <div class="feed-footer"><span id="beam-status">SIGNAL ACTIVE</span><span class="coordinate-label">SECURE CHANNEL / 01</span></div>
+        </section>
+
+        <aside class="instrument-panel" aria-label="Heist controls">
+          <div class="telemetry">
+            <div class="moves-readout"><div class="readout-label">MOVES <span>/ PAR <b id="par-value">03</b></span></div><div class="move-number" id="moves-value">00</div><div class="par-meter" id="par-meter" aria-hidden="true"></div></div>
+            <div class="small-readouts">
+              <div><span class="readout-label">LASER RANGE</span><strong><span id="range-value">08</span> <span class="unit">tiles</span></strong></div>
+              <div><span class="readout-label">CCTV PHASE</span><strong id="phase-value">Offline</strong><span id="phase-dots" class="phase-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+            </div>
+          </div>
+          <div class="toolkit">
+            <p class="eyebrow">THE TOOLKIT</p>
+            <button id="wait-button" class="button tool" type="button" disabled><span class="tool-text"><span class="wait-icon" aria-hidden="true">Ⅱ</span> Wait a beat</span><kbd>W / Space</kbd></button>
+            <button id="undo-button" class="button tool" type="button" disabled><span class="tool-text"><canvas data-icon="undo" width="28" height="28" aria-hidden="true"></canvas> Undo</span><kbd>Z</kbd></button>
+            <button id="reset-button" class="button tool" type="button"><span class="tool-text"><canvas data-icon="reset" width="28" height="28" aria-hidden="true"></canvas> Reset vault</span><kbd>R</kbd></button>
+            <button id="hint-button" class="button tool hint-button" type="button"><span class="tool-text"><canvas data-icon="hint" width="28" height="28" aria-hidden="true"></canvas> Reveal a hint</span><kbd>H</kbd></button>
+          </div>
+          <div class="comms"><span class="comms-symbol" aria-hidden="true">⌁</span><p id="status-message" role="status" aria-live="polite">Signal live. Vault 01 online.</p></div>
+        </aside>
+      </div>
+
+      <div class="field-legend" aria-label="Map legend">
+        <span><i class="legend-emitter" aria-hidden="true"></i> Emitter</span><span><i class="legend-prism" aria-hidden="true"></i> Prism</span><span><i class="legend-booster" aria-hidden="true"></i> Booster</span><span><i class="legend-diamond" aria-hidden="true"></i> Diamond</span>
+      </div>
+    </main>
+    <footer class="site-footer"><span>A QUIET HEIST MADE OF LIGHT.</span><span><b id="progress-count">0</b> / 2 VAULTS CLEARED</span></footer>
+  </div>
+
+  <dialog id="title-dialog" class="title-dialog" aria-labelledby="title-name">
+    <div class="title-topline"><span class="eyebrow">AFTER HOURS / SPECIAL OPERATIONS</span><span class="edition-tag">VOL. 01</span></div>
+    <div class="title-art"><canvas id="title-art" width="360" height="180" aria-hidden="true"></canvas></div>
+    <p class="eyebrow title-kicker">THE VAULT IS QUIET. THE LIGHT IS YOURS.</p>
+    <h2 id="title-name">PRISM<br><span>HEIST<span class="title-period">.</span></span></h2>
+    <p class="title-subtitle">Turn the light. Take the diamond.</p>
+    <button id="start-button" class="button primary start-button" type="button">Press to Start <span aria-hidden="true">↗</span></button>
+    <div class="title-bottomline"><span>02 VAULTS / ONE CLEAN GETAWAY</span><span>NO TIMER. JUST YOU.</span></div>
+  </dialog>
+
+  <dialog id="levels-dialog" class="modal" aria-labelledby="levels-title">
+    <div class="modal-top"><p class="eyebrow">CHOOSE YOUR TARGET</p><button class="button close-button" data-close="levels-dialog" type="button" aria-label="Close vault selection">×</button></div>
+    <h2 id="levels-title">The vaults<span class="cyan">.</span></h2>
+    <p class="modal-description">Two vaults are online. Your best stars stay with you.</p>
+    <div id="level-grid" class="level-grid"></div>
+    <p class="modal-footnote">OPERATIONS 03–08 / OFFLINE</p>
+  </dialog>
+
+  <dialog id="victory-dialog" class="modal victory-dialog" aria-labelledby="victory-title">
+    <p class="eyebrow">TRANSMISSION / SUCCESS</p>
+    <div class="victory-diamond" aria-hidden="true">◇</div>
+    <h2 id="victory-title">Diamond secured<span class="cyan">.</span></h2>
+    <p id="victory-description" class="modal-description">A clean getaway.</p>
+    <div id="victory-stars" class="victory-stars" aria-label="3 stars"></div>
+    <div class="victory-stats"><span>MOVES <b id="victory-moves">3</b></span><span>PAR <b id="victory-par">3</b></span><span>BEST <b id="victory-best">3 / 3</b></span></div>
+    <button id="next-button" class="button primary" type="button"><span id="next-label">Next vault</span><span aria-hidden="true">↗</span></button>
+    <div class="victory-secondary"><button id="replay-button" class="text-button" type="button">Replay vault</button><span>Enter / Space to continue</span></div>
+  </dialog>
+
+  <noscript><div class="noscript">Prism Heist needs JavaScript enabled to power the vault.</div></noscript>
+  <script src="js/levels.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/solver.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>
