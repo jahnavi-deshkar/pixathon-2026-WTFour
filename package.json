@@ -1,0 +1,10 @@
+{
+  "name": "prism-heist",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Prism Heist \u2014 Top-Down Stealth Laser-Routing Puzzle Game (Vercel Static Ready)",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  }
+}
