@@ -2,7 +2,7 @@
 
 A complete, zero-build-step HTML5 Canvas stealth laser puzzle game ready for instant deployment on **Vercel**.
 
-DEMO LINK: https://pixathon-2026-wtfour-dim072rn5-jahnavi-c65a.vercel.app/
+DEMO LINK: https://prism-heist.vercel.app/
 
 ## 📂 Customizing Sprites & Audio (`/assets`)
 
